@@ -11,10 +11,12 @@ public class Mission1 : MonoBehaviour
 
     Animator anim;
     PlayerCtrl playerCtrl_script;
+    MissionCtrl missionCtrl_script;
 
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
+        missionCtrl_script = FindObjectOfType<MissionCtrl>();
     }
 
     //미션 시작
@@ -51,7 +53,7 @@ public class Mission1 : MonoBehaviour
         Image img = EventSystem.current.currentSelectedGameObject.GetComponent<Image>();
 
         // 하얀색
-        if(img.color == Color.white)
+        if (img.color == Color.white)
 
         {
             // 빨간색으로
@@ -67,17 +69,17 @@ public class Mission1 : MonoBehaviour
         // 성공여부 체크
         int count = 0;
 
-        for(int i = 0; i < images.Length; i++)
+        for (int i = 0; i < images.Length; i++)
         {
-            if(images[i].color == Color.white)
+            if (images[i].color == Color.white)
             {
                 count++;
             }
         }
-        if(count == images.Length)
+        if (count == images.Length)
         {
             //성공
-            Invoke("MissionSuccess", 0.2f); 
+            Invoke("MissionSuccess", 0.2f);
         }
 
     }
@@ -86,6 +88,7 @@ public class Mission1 : MonoBehaviour
     public void MissionSuccess()
     {
         ClickCancle();
+        missionCtrl_script.MissionSuccess(GetComponent<CircleCollider2D>());
     }
 
 }

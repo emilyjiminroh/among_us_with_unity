@@ -9,6 +9,8 @@ public class Mission2 : MonoBehaviour
     public Transform trash, handle;
     public GameObject bottom;
     public Animator anim_shake;
+    MissionCtrl missionCtrl_script;
+
 
     Animator anim;
     PlayerCtrl playerCtrl_script;
@@ -23,6 +25,8 @@ public class Mission2 : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         rect_handle = handle.GetComponent<RectTransform>();
         originPos = rect_handle.anchoredPosition; // 원래 위치 저장
+        missionCtrl_script = FindObjectOfType<MissionCtrl>();
+
     }
 
     private void Update()
@@ -70,6 +74,10 @@ public class Mission2 : MonoBehaviour
             {
                 MissionSuccess();
                 isPlay = false;
+
+                rect_handle.anchoredPosition = originPos;
+                isDrag = false;
+                anim_shake.enabled = false;
             }
         }
        
@@ -144,6 +152,8 @@ public class Mission2 : MonoBehaviour
     public void MissionSuccess()
     {
         ClickCancle();
+        missionCtrl_script.MissionSuccess(GetComponent<CircleCollider2D>());
+
     }
 
 }

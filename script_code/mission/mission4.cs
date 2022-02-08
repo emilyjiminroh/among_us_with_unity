@@ -9,6 +9,7 @@ public class Mission4 : MonoBehaviour
     public Transform numbers;
     public Color blue;
 
+    MissionCtrl missionCtrl_script;
     Animator anim;
     PlayerCtrl playerCtrl_script;
 
@@ -17,6 +18,8 @@ public class Mission4 : MonoBehaviour
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
+        missionCtrl_script = FindObjectOfType<MissionCtrl>();
+
     }
 
     //미션 시작
@@ -78,6 +81,8 @@ public class Mission4 : MonoBehaviour
     public void MissionSuccess()
     {
         ClickCancle();
+        missionCtrl_script.MissionSuccess(GetComponent<CircleCollider2D>());
+
     }
 
 }
